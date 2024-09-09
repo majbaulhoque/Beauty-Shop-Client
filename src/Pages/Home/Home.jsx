@@ -1,8 +1,11 @@
+import HomePage from "../../Component/Home/HomePage";
+import OurProducts from "../../Component/Home/OurProducts";
 
 const Home = () => {
     return (
-        <div className="text-center">
-            testing
+        <div className="">
+            <HomePage />
+            <OurProducts />
         </div>
     );
 };
