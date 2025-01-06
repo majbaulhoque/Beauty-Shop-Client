@@ -3,8 +3,9 @@ import MainLayout from "../Layout/MainLayout";
 import Home from "../Pages/Home/Home";
 import Product from "../Pages/Product/Product";
 import MyCarts from "../Pages/Cart/MyCarts";
-import Login from "../Pages/Login/Login";
 import Contact from "../Pages/Contact/contact";
+import SignUp from "../Pages/Sign Up/SignUp";
+import SignIn from "../Pages/Sign In/SignIn";
 
 
 const Route = createBrowserRouter ([
@@ -30,7 +31,11 @@ const Route = createBrowserRouter ([
             },
             {
                 path: '/login',
-                element: <Login />,
+                element: <SignIn />
+            },
+            {
+                path: '/signUp',
+                element: <SignUp />,
             },
         ],
     },

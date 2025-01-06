@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import Logo from './Logo';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RxCross2 } from "react-icons/rx";
+import { AuthContext } from '../../Providers/AuthProviders';
 
 const getClassName = ({ isActive, isPending }) => {
     return [
@@ -11,12 +12,19 @@ const getClassName = ({ isActive, isPending }) => {
     ].filter(Boolean).join(" ");
 };
 
-
 const NavBar = () => {
+    const { user, logOut } = useContext(AuthContext);
+    const handleSignOut = () =>{
+        logOut()
+        .then(result => {
+            console.log(result.user)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
 
     const [isOpen, setIsOpen] = useState(false)
-
-
 
     return (
         <div className='bg-black top-0 sticky z-30'>
@@ -25,7 +33,7 @@ const NavBar = () => {
                     <Logo />
                 </div>
                 <div>
-                    <div className='md:hidden text-white text-xl' onClick={() =>setIsOpen(!isOpen)}>
+                    <div className='md:hidden text-white text-xl' onClick={() => setIsOpen(!isOpen)}>
                         {
                             isOpen === true ? <RxCross2 /> : <GiHamburgerMenu />
                         }
@@ -35,7 +43,16 @@ const NavBar = () => {
                         <li><NavLink to='/product' className={getClassName}>Product</NavLink></li>
                         <li><NavLink to='/cart' className={getClassName}>My Cart</NavLink></li>
                         <li><NavLink to='/contact' className={getClassName}>Contact Us</NavLink></li>
-                        <li><NavLink to='/login' className={getClassName}>Login</NavLink></li>
+                        {
+                            user ?
+                                <li>
+                                    <NavLink onClick={handleSignOut} className={getClassName}>Log Out</NavLink>
+                                </li>
+                                :
+                                <li>
+                                    <NavLink to='/login' className={getClassName}>Login</NavLink>
+                                </li>
+                        }
                     </ul>
                 </div>
             </div>
