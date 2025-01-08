@@ -6,20 +6,23 @@ import MyCarts from "../Pages/Cart/MyCarts";
 import Contact from "../Pages/Contact/contact";
 import SignUp from "../Pages/Sign Up/SignUp";
 import SignIn from "../Pages/Sign In/SignIn";
+import PrivateRoute from "./PrivateRoute";
 
 
-const Route = createBrowserRouter ([
+const Route = createBrowserRouter([
     {
-        path : '/',
-        element : <MainLayout />,
-        children : [
+        path: '/',
+        element: <MainLayout />,
+        children: [
             {
                 path: '/',
                 element: <Home />,
             },
             {
                 path: '/product',
-                element: <Product />,
+                element: <PrivateRoute>
+                    <Product />
+                </PrivateRoute>
             },
             {
                 path: '/cart',
